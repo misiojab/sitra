@@ -1,9 +1,16 @@
 package com.misiojab.sitra.Issue;
 
 
-import java.sql.Timestamp;
+import com.misiojab.sitra.AppConfig;
+
+import java.sql.*;
+import java.util.ArrayList;
+
+
 
 public class Issue {
+
+
 
   private long id;
   private String category;
@@ -18,11 +25,16 @@ public class Issue {
   private String projectName;
   private long sprintId;
 
-    public Issue(String string, String string1, String string2, String string3, String string4, String string5, String string6, Timestamp string7, Timestamp string8, String string9, int anInt) {
-    }
+  public Issue(String string, String string1, String string2, String string3, String string4, String string5, String string6, Timestamp string7, Timestamp string8, String string9, int anInt) {
+  }
+
+  public Issue() {
+
+  }
 
 
-    public long getId() {
+
+  public long getId() {
     return id;
   }
 

@@ -1,14 +1,15 @@
 package com.misiojab.sitra;
 
+import com.misiojab.sitra.Issue.Issue;
 import com.misiojab.sitra.Issue.IssueService;
 import com.misiojab.sitra.Login.LoginService;
 import com.misiojab.sitra.Utils.ThrowException;
 
 import java.nio.file.Paths;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
+import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.RandomAccess;
 
 public class MainService {
 
@@ -21,6 +22,8 @@ public class MainService {
         this.loginService = new LoginService(this);
         this.issueService = new IssueService(this);
     }
+
+
 
     public void initialize() {
         // loginService.init();
@@ -87,16 +90,13 @@ public class MainService {
                             foreign key (Assigned_team) references team (Team_name)
                     );
                     """, PreparedStatement::execute);
-
+/*
             mainService.prepareStatement("""
                     CREATE TABLE IF NOT EXISTS issue(
                     
                     """, PreparedStatement::execute);
+*/
 
-            mainService.prepareStatement("""
-                    CREATE TABLE IF NOT EXISTS issue(
-                    
-                    """, PreparedStatement::execute);
 
             mainService.initialize();
             return mainService;
@@ -106,15 +106,15 @@ public class MainService {
 
     }
 
-
-
     public <R> R prepareStatement(String sql, ThrowException<PreparedStatement, R, SQLException> request) throws SQLException {
         PreparedStatement preparedStatement = null;
         try {
-            Connection connection = DriverManager.getConnection(AppConfig.DATABASE_URI);
+            Class.forName(AppConfig.DATABASE_DRIVER);
+
+            Connection connection = DriverManager.getConnection(AppConfig.DATABASE_URI + "/" + AppConfig.DATABASE, AppConfig.USER, AppConfig.PASSWORD);
             preparedStatement = connection.prepareStatement(sql);
 
-        } catch (SQLException ex) {
+        } catch (SQLException | ClassNotFoundException ex) {
             ex.printStackTrace();
         }
 
