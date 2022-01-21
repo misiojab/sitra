@@ -1,3 +1,8 @@
 ## Sitra
-#Dependencies
+## _Simple bugtracking web app_
+# Dependencies
+> Java 17
+> Tomcat 10.0.13
+> MySQL
+> Jakarta EE9
 #
