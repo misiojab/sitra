@@ -42,19 +42,7 @@ public class MainService {
             MainService mainService = new MainService();
 
             mainService.prepareStatement("""
-                    CREATE TABLE IF NOT EXISTS feature
-                    (
-                        id           INT NOT NULL AUTO_INCREMENT
-                            primary key,
-                        Feature_name varchar(50) not null,
-                        Project      varchar(50) not null,
-                        constraint IX_Feature
-                            unique (Feature_name)
-                    );
-                    """, PreparedStatement::execute);
-
-            mainService.prepareStatement("""
-                    CREATE TABLE IF NOT EXISTS issue
+                    create table IF NOT EXISTS issue
                     (
                         Category     varchar(50) null,
                         Name         varchar(50) not null,
@@ -67,23 +55,17 @@ public class MainService {
                         Last_update  datetime    null,
                         Project_name varchar(50) not null,
                         Sprint_id    int         not null,
-                        constraint FK_Issue_Category
-                            foreign key (Category) references category (Category_name),
-                        constraint FK_Issue_Feature
-                            foreign key (Feature) references feature (Feature_name),
+                        Due_date     datetime    null,
                         constraint FK_Issue_Sprint
                             foreign key (Sprint_id) references sprint (id),
-                        constraint FK_Issue_Status
-                            foreign key (Status) references status (Status_name),
                         constraint FK_Issue_User
-                            foreign key (Assigned_to) references user (username))
+                            foreign key (Assigned_to) references user (username)
+                    );
                     """, PreparedStatement::execute);
 
             mainService.prepareStatement("""
                     CREATE TABLE IF NOT EXISTS project
                     (
-                        id            int         not null
-                            primary key,
                         Project_name  varchar(50) not null,
                         Assigned_team varchar(50) null,
                         constraint FK_Project_Team

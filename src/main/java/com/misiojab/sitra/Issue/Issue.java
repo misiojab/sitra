@@ -24,15 +24,19 @@ public class Issue {
   private java.sql.Timestamp lastUpdate;
   private String projectName;
   private long sprintId;
+  private Timestamp dueDate;
 
-  public Issue(String string, String string1, String string2, String string3, String string4, String string5, String string6, Timestamp string7, Timestamp string8, String string9, int anInt) {
-  }
 
   public Issue() {
-
   }
 
+  public Timestamp getDueDate (){
+    return openedTime;
+  }
 
+  public void setDueDate (Timestamp dueDate){
+    this.dueDate = dueDate;
+  }
 
   public long getId() {
     return id;

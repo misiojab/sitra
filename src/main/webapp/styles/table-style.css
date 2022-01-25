@@ -1,0 +1,68 @@
+.priority-cell {
+    border-radius: 10px;
+    text-align: center;
+    width: fit-content;
+    height: 20px;
+    padding: 7px;
+    line-height: 10px;
+    font-size: .7rem;
+    font-weight: 700;
+    min-width: 50px;
+}
+
+.priority-Critical {
+    border:  1px solid #DE3163;
+    background: rgba(193, 66, 66, 0.55);
+}
+
+.priority-High {
+    border:  1px solid #FF7F50;
+    background: rgba(255, 127, 80, 0.55);
+}
+
+.priority-Medium {
+    border:  1px solid #FFBF00;;
+    background: rgba(255, 191, 0, 0.55);;
+}
+
+.priority-Low {
+    border:  1px solid #9FE2BF;
+    background: rgba(159, 226, 191, 0.55);
+}
+
+.priority-Optional {
+    border:  1px solid #40E0D0;
+    background: rgba(64, 224, 208, 0.55);
+}
+
+.status-cell {
+    border-radius: 10px;
+    text-align: center;
+    width: fit-content;
+    min-width: 50px;
+    height: 20px;
+    padding: 7px;
+    line-height: 10px;
+    font-size: .7rem;
+    font-weight: 700;
+}
+
+.status-Todo {
+    border:  1px solid #a6a6a6;
+    background: rgb(166, 166, 166, 0.55);
+}
+
+.status-Inprogress {
+    border:  1px solid #0099ff;
+    background: rgba(0, 153, 255, 0.55);
+}
+
+.status-Done {
+    border:  1px solid #00cc00;
+    background: rgba(64, 224, 208, 0.55);
+}
+
+.status-Waiting {
+    border:  1px solid #ffcc66;
+    background: rgb(255, 204, 102, 0.55);
+}
