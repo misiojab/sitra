@@ -10,7 +10,7 @@ import jakarta.servlet.http.HttpSession;
 
 import java.sql.SQLException;
 
-@WebServlet(name = "ProjectServlet", value = "/api/project")
+@WebServlet(name = "ProjectServlet", value = "/project")
 public class ProjectServlet extends HttpServlet {
 
     private final ProjectService projectService = new ProjectService(MainService.getInstance());

@@ -1,7 +1,10 @@
 <%@ page import="com.misiojab.sitra.Issue.Issue" %>
 <%@ page import="com.misiojab.sitra.Issue.IssueService" %>
 <%@ page import="java.util.Iterator" %>
-<%@ page import="java.util.List" %><%--
+<%@ page import="java.util.List" %>
+<%@ page import="com.misiojab.sitra.Project.Project" %>
+<%@ page import="com.misiojab.sitra.Project.ProjectService" %>
+<%--
   Created by IntelliJ IDEA.
   User: misio
   Date: 21.01.2022
@@ -35,12 +38,20 @@
         <div class="">
             <h4 class="mb-3">Add new issue / Edit Issue</h4>
 
-            <jsp:useBean id="issue" class="com.misiojab.sitra.Issue.Issue" scope="request"></jsp:useBean>
-
-            <form class="needs-validation" action="${pageContext.request.contextPath}/api/issue" method="post" novalidate>
+            <form class="needs-validation" action="${pageContext.request.contextPath}/issue" method="post" novalidate>
                 <div class="row g-3">
 
-                    <div class="col-sm-4">
+                    <jsp:useBean id="issue" class="com.misiojab.sitra.Issue.Issue" scope="request"></jsp:useBean>
+
+                    <div class="col-md-1">
+                        <label for="id" class="form-label">id</label>
+                        <input name="id" type="number" value="<%=issue.getId()%>" class="form-control" id="id" placeholder="" readonly>
+                        <div class="invalid-feedback">
+                            id required!
+                        </div>
+                    </div>
+
+                    <div class="col-sm-5">
                         <label for="issuename" class="form-label">Issue name</label>
                         <input name="name" type="text" class="form-control" id="issuename" placeholder="Choose something nice" value="<%=issue.getName()%>" required>
                         <div class="invalid-feedback">
@@ -48,17 +59,17 @@
                         </div>
                     </div>
 
-                    <div class="col-md-5">
+                    <div class="col-md-3">
                         <label for="project" class="form-label">Project</label>
                         <select name="project" class="form-select" id="project" required>
                             <option value="<%=issue.getProjectName()%>">Choose...</option>
                             <%
-                                int indexProjectOption = 1;
-                                List<Project> projectListOption = ProjectService.projectList();
-                                Iterator projectOptionIterator = projectListOption.iterator();
+
+                                List projectListOption = ProjectService.projectList();
+                                Iterator<Project> projectOptionIterator = projectListOption.iterator();
 
                                 while (projectOptionIterator.hasNext()) {
-                                    Project project = (Project) projectOptionIterator.next();
+                                    Project project = projectOptionIterator.next();
                             %>
 
                             <option><%=project.getProjectName()%></option>
@@ -131,7 +142,7 @@
                             </div>
                         </div>
                     </div>
-z
+
                     <div class="col-md-2">
                         <label for="sprint" class="form-label">Sprint id</label>
                         <input name="sprint" type="number" value="<%=issue.getSprintId()%>" class="form-control" id="sprint" placeholder="" required>
@@ -139,15 +150,18 @@ z
                             Sprint id required!
                         </div>
                     </div>
+
                 </div>
 
-                <button class="w-25 btn btn-outline-danger btn-sm align-items-end" type="submit">Cancel</button>
+                <br>
+                <button class="w-25 btn btn-outline-danger btn-sm align-items-end" type="reset">Cancel</button>
                 <button class="w-25 btn btn-primary btn-sm" type="submit">Add issue</button>
             </form>
         </div>
 
     </div>
-
+<br>
+    <br>
     <div class="table-responsive">
         <table class="table table-striped table-sm">
             <thead>
@@ -170,23 +184,23 @@ z
             <%
                 int indexIssue = 1;
                 List<Issue> listIssue = IssueService.issueList();
-                Iterator issueIterator = listIssue.iterator();
+                Iterator<Issue> issueIterator = listIssue.iterator();
 
                 while (issueIterator.hasNext()) {
-                    Issue issue = (Issue) issueIterator.next();
+                    Issue issueI = issueIterator.next();
             %>
             <tr>
                 <th scope="row"><%=indexIssue++%></th>
-                <td><%=issue.getName()%></td>
-                <td><div class="priority-cell priority-<%=issue.getPriority()%>"><%=issue.getPriority()%></div></td>
-                <td><div class="status-cell status-<%=issue.getStatus().replaceAll("\\s+","")%>"><%=issue.getStatus()%></div></td>
-                <td><%=issue.getAssignedTo()%></td>
-                <td><%=issue.getOpenedTime()%></td>
-                <td><%=issue.getDueDate()%></td>
-                <td><%=issue.getDescription()%></td>
-                <td><%=issue.getProjectName()%></td>
-                <td><%=issue.getSprintId()%></td>
-                <td><%=issue.getLastUpdate()%></td>
+                <td><%=issueI.getName()%></td>
+                <td><div class="priority-cell priority-<%=issueI.getPriority()%>"><%=issueI.getPriority()%></div></td>
+                <td><div class="status-cell status-<%=issueI.getStatus().replaceAll("\\s+","")%>"><%=issueI.getStatus()%></div></td>
+                <td><%=issueI.getAssignedTo()%></td>
+                <td><%=issueI.getOpenedTime()%></td>
+                <td><%=issueI.getDueDate()%></td>
+                <td><%=issueI.getDescription()%></td>
+                <td><%=issueI.getProjectName()%></td>
+                <td><%=issueI.getSprintId()%></td>
+                <td><%=issueI.getLastUpdate()%><a href="${pageContext.request.contextPath}/issue?id=<%=issueI.getId()%>">edit</a></td>
 
             </tr>
             <% } %>
@@ -197,7 +211,3 @@ z
 
 </body>
 </html>
-<%!
-    private Object getString(String name) {
-    }
-%>

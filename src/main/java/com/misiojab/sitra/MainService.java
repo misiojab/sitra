@@ -1,15 +1,12 @@
 package com.misiojab.sitra;
 
-import com.misiojab.sitra.Issue.Issue;
 import com.misiojab.sitra.Issue.IssueService;
 import com.misiojab.sitra.Login.LoginService;
 import com.misiojab.sitra.Utils.ThrowException;
 
 import java.nio.file.Paths;
 import java.sql.*;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.RandomAccess;
+
 
 public class MainService {
 
@@ -72,16 +69,14 @@ public class MainService {
                             foreign key (Assigned_team) references team (Team_name)
                     );
                     """, PreparedStatement::execute);
-/*
-            mainService.prepareStatement("""
-                    CREATE TABLE IF NOT EXISTS issue(
-                    
-                    """, PreparedStatement::execute);
-*/
+
+
+
 
 
             mainService.initialize();
             return mainService;
+
         } catch (Exception e) {
             throw new RuntimeException("nie tworzy sie main service", e);
         }

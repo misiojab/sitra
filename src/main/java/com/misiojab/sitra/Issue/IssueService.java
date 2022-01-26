@@ -56,8 +56,8 @@ public class IssueService {
         while (resultSet.next()) {
             key = resultSet.getLong(1);
         }
-
-        return key++;
+        System.out.println(key+" "+key+1);
+        return key+1;
     }
 
     public static List issueList() throws SQLException {
@@ -121,4 +121,49 @@ public class IssueService {
         }
         return issue;
     }
+
+    public static void updateIssue (Issue issue) {
+        Timestamp now = new Timestamp(System.currentTimeMillis());
+        try {
+            Connection connection = DriverManager.getConnection(AppConfig.DATABASE_URI + "/" + AppConfig.DATABASE, AppConfig.USER, AppConfig.PASSWORD);
+            PreparedStatement statement = connection.prepareStatement("""
+                UPDATE issue SET Category=?, Name=?, Priority=?,
+                Feature=?, Status=?, Assigned_to=?,
+                Description=?, Last_update=?,
+                Project_name=?, Sprint_id=?, Due_date=? where id=?
+            """);
+
+            statement.setString(1, issue.getCategory());
+            statement.setString(2, issue.getName());
+            statement.setString(3, issue.getPriority());
+            statement.setString(4, issue.getFeature());
+            statement.setString(5, issue.getStatus());
+            statement.setString(6, issue.getAssignedTo());
+            statement.setString(7, issue.getDescription());
+            statement.setTimestamp(8, now);
+            statement.setString(9, issue.getProjectName());
+            statement.setInt(10, (int) issue.getSprintId());
+            statement.setTimestamp(11, issue.getDueDate());
+            statement.setLong(12, issue.getId());
+
+            statement.executeUpdate();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static void deleteIssue (Issue issue) {
+        try {
+            Connection connection = DriverManager.getConnection(AppConfig.DATABASE_URI + "/" + AppConfig.DATABASE, AppConfig.USER, AppConfig.PASSWORD);
+            PreparedStatement statement = connection.prepareStatement("""
+                DELETE FROM issues WHERE id=?
+            """);
+            statement.setLong(1, issue.getId());
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
 }
