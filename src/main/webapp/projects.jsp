@@ -1,7 +1,10 @@
 <%@ page import="java.util.Iterator" %>
 <%@ page import="java.util.List" %>
 <%@ page import="com.misiojab.sitra.Project.Project" %>
-<%@ page import="com.misiojab.sitra.Project.ProjectService" %><%--
+<%@ page import="com.misiojab.sitra.Project.ProjectService" %>
+<%@ page import="com.misiojab.sitra.Team.Team" %>
+<%@ page import="com.misiojab.sitra.Team.TeamService" %>
+<%--
   Created by IntelliJ IDEA.
   User: misio
   Date: 21.01.2022
@@ -30,6 +33,49 @@
         </div>
     </div>
 
+    <div>
+            <h4 class="mb-3">Add new project / edit project</h4>
+
+            <form class="needs-validation" action="${pageContext.request.contextPath}/project" method="post" novalidate>
+                <div class="row g-3">
+
+                    <jsp:useBean id="project" class="com.misiojab.sitra.Project.Project" scope="request"></jsp:useBean>
+
+                    <div class="col-sm-5">
+                        <label for="project" class="form-label">Project name</label>
+                        <input name="project" type="text" class="form-control" id="project" placeholder="Choose something nice" value="<%=project.getProjectName()%>" required>
+                        <div class="invalid-feedback">
+                            Valid name is required.
+                        </div>
+                    </div>
+
+                    <div class="col-md-3">
+                        <label for="team" class="form-label">Team</label>
+                        <select name="team" class="form-select" id="team" required>
+                            <option value="<%=project.getAssignedTeam()%>">Choose...</option>
+                            <%
+
+                                List teamListOption = TeamService.teamList();
+                                Iterator<Team> teamIterator = teamListOption.iterator();
+
+                                while (teamIterator.hasNext()) {
+                                    Team team = teamIterator.next();
+                            %>
+
+                            <option><%=team.getTeamName()%></option>
+                            <% } %>
+                        </select>
+                        <div class="invalid-feedback">
+                            Project required
+                        </div>
+                    </div>
+
+                <br>
+                <button class="w-25 btn btn-outline-danger btn-sm align-items-end" type="reset">Cancel</button>
+                <button class="w-25 btn btn-primary btn-sm" type="submit">Add project</button>
+            </form>
+        </div>
+
     <div class="table-responsive">
         <table class="table table-striped table-sm">
             <thead>
@@ -47,12 +93,12 @@
                 Iterator projectIterator = projectList.iterator();
 
                 while (projectIterator.hasNext()) {
-                    Project project = (Project) projectIterator.next();
+                    Project projectI = (Project) projectIterator.next();
             %>
             <tr>
                 <th scope="row"><%=indexProject++%></th>
-                <td><%=project.getProjectName()%></td>
-                <td><%=project.getAssignedTeam()%></td>
+                <td><%=projectI.getProjectName()%></td>
+                <td><%=projectI.getAssignedTeam()%></td>
 
 
             </tr>

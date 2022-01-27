@@ -6,6 +6,7 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 
 import java.io.IOException;
 import java.sql.SQLException;
@@ -17,7 +18,6 @@ public class IssueServlet extends HttpServlet {
     private final IssueService issueService = new IssueService(MainService.getInstance());
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        response.getWriter().append("Served at: ").append(request.getContextPath());
 
         long id = Long.parseLong(request.getParameter("id"));
 
@@ -26,7 +26,8 @@ public class IssueServlet extends HttpServlet {
             issue = IssueService.findById(id);
             request.setAttribute("issue", issue);
         }
-        request.getRequestDispatcher("index.jsp").forward(request, response);
+
+        request.getRequestDispatcher("/").forward(request, response);
     }
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -59,6 +60,6 @@ public class IssueServlet extends HttpServlet {
             }
         }
 
-        request.getRequestDispatcher("index.jsp").forward(request, response);
+        request.getRequestDispatcher("/").forward(request, response);
     }
 }

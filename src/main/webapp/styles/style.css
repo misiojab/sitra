@@ -2,6 +2,17 @@ body {
   font-size: .875rem;
 }
 
+.wrapper > div{
+  display: none;
+}
+.wrapper > div.visible{
+  display: block;
+}
+
+ ul li {
+   cursor: pointer;
+ }
+
 
 /*
  * Sidebar

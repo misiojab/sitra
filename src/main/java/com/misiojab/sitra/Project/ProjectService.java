@@ -10,16 +10,17 @@ import java.util.List;
 
 public class ProjectService {
 
-    private final MainService mainService;
+    private static MainService mainService;
 
     public ProjectService(MainService mainService) {
         this.mainService = mainService;
     }
 
-    public void CreateProject(String name, String team) throws SQLException {
+
+    public static void CreateProject(String name, String team) throws SQLException {
 
         mainService.prepareStatement("""
-            INSERT INTO issue
+            INSERT INTO project
             (
             Project_name, Assigned_team
             )

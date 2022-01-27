@@ -8,7 +8,22 @@ public class User {
   private String password;
   private String role;
   private String team;
+  private String encryptedPassword;
 
+    public User(long aLong, String string, String string1, String string2, String string3) {
+    }
+
+  public User() {
+
+  }
+
+  public String getEncryptedPassword(){
+      return encryptedPassword;
+  }
+
+  public void setEncryptedPassword(String encryptedPassword){
+    this.encryptedPassword = encryptedPassword;
+  }
 
   public long getId() {
     return id;

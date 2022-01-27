@@ -2,6 +2,8 @@ package com.misiojab.sitra;
 
 import com.misiojab.sitra.Issue.IssueService;
 import com.misiojab.sitra.Login.LoginService;
+import com.misiojab.sitra.Project.ProjectService;
+import com.misiojab.sitra.Team.TeamService;
 import com.misiojab.sitra.Utils.ThrowException;
 
 import java.nio.file.Paths;
@@ -14,16 +16,18 @@ public class MainService {
 
     private final IssueService issueService;
     private final LoginService loginService;
+    private final ProjectService projectService;
+    private final TeamService teamService;
 
     private MainService() {
         this.loginService = new LoginService(this);
         this.issueService = new IssueService(this);
+        this.projectService = new ProjectService(this);
+        this.teamService = new TeamService(this);
     }
 
-
-
-    public void initialize() {
-        // loginService.init();
+    public void initialize() throws SQLException {
+        //loginService.initialize();
         //issueService.initialize();
     }
 
@@ -69,10 +73,6 @@ public class MainService {
                             foreign key (Assigned_team) references team (Team_name)
                     );
                     """, PreparedStatement::execute);
-
-
-
-
 
             mainService.initialize();
             return mainService;

@@ -5,7 +5,7 @@
   Time: 05:00
   To change this template use File | Settings | File Templates.
 --%>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+
 <%@page import="com.misiojab.sitra.Login.User" %>
 <%@page import="com.misiojab.sitra.Login.LoginServlet" %>
 <html>
@@ -41,8 +41,7 @@
 
         </svg>
     </div>
-    <form action="${pageContext.request.contextPath}/login" method="post">
-
+    <form action="${pageContext.request.contextPath}/login" method="get">
 
         <h1 class="h3 mb-3 fw-normal">Hello</h1>
 
