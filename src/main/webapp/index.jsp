@@ -15,6 +15,8 @@
     <style>
     </style>
 
+
+
     <!-- Custom styles for this -->
     <link href="styles/style.css" rel="stylesheet">
 
@@ -25,9 +27,6 @@
     Object username = request.getSession().getAttribute("authorised");
     System.out.println(username);
     boolean isAuthenticated = username != null;
-
-
-
 
 %>
 
@@ -43,21 +42,23 @@
 <% if (isAuthenticated) { %>
 
 <!-- HEADER -->
- <%@ include file="header.jsp"%>
+<%@ include file="header.jsp"%>
 
 <!-- SIDEBAR -->
 <%@ include file="sidebar.jsp"%>
 
 <!-- CONTENT -->
 <div class="wrapper">
-<div class="issuesView visible">
-    <%@ include file="issues.jsp"%>
+    <div class="issuesView visible">
+        <%@ include file="issues.jsp"%>
+    </div>
+    <div class="projectsView">
+        <%@include file="projects.jsp"%>
+    </div>
+    <div class="dashboardView">
+        <%@include file="dashboard.jsp"%>
+    </div>
 </div>
-<div class="projectsView">
-    <%@include file="projects.jsp"%>
-</div>
-</div>
-
 <% } %>
 
 </body>

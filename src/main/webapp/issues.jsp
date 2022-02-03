@@ -21,9 +21,22 @@
     <style>
     </style>
 
+    <script>
+
+        function myFunction() {
+            var x = document.getElementById("addIssueView");
+            if (x.style.display === "none") {
+                x.style.display = "block";
+            } else {
+                x.style.display = "none";
+            }
+        }
+    </script>
+
     <!-- Custom styles for this -->
     <link href="styles/style.css" rel="stylesheet">
     <link href="styles/table-style.css" rel="stylesheet">
+    <script src="script.js" rel="script"></script>
 </head>
 <body>
 
@@ -36,7 +49,8 @@
     </div>
 
     <div>
-        <div class="">
+        <div class="wrapper">
+        <div id="addIssueView" class="visible">
             <h4 class="mb-3">Add new issue / Edit Issue</h4>
 
             <form class="needs-validation" action="${pageContext.request.contextPath}/issue" method="post" novalidate>
@@ -161,7 +175,20 @@
         </div>
 
     </div>
-<br>
+    </div>
+    <br>
+    <br>
+    <div class="container">
+        <div class="row row-cols-sm-5">
+            <div class="col"></div>
+            <div class="col"></div>
+            <div class="col"></div>
+            <div class="col"></div>
+            <div class="col">
+                <button id="addIssueViewButton" class="btn-sm btn btn-outline-dark" onclick="myFunction()">+ Add Issue</button>
+            </div>
+        </div>
+    </div>
     <br>
     <div class="table-responsive">
         <table class="table table-striped table-sm">

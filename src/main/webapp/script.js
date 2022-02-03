@@ -10,4 +10,6 @@ jQuery(function($){
         $(".nav-link").removeClass("active");
         $(this).addClass("active");      //add the class to the clicked element
     });
+
 });
+

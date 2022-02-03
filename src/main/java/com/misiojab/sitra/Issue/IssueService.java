@@ -122,6 +122,39 @@ public class IssueService {
         return issue;
     }
 
+    public static List userIssues(String username) throws SQLException {
+
+        ArrayList list = new ArrayList();
+        Connection connection = DriverManager.getConnection(AppConfig.DATABASE_URI + "/" + AppConfig.DATABASE, AppConfig.USER, AppConfig.PASSWORD);
+        PreparedStatement preparedStatement = connection.prepareStatement("""
+            SELECT * FROM issue WHERE Assigned_to = ?
+            """);
+        preparedStatement.setString(1, username);
+
+        ResultSet resultSet = preparedStatement.executeQuery();
+
+        while (resultSet.next()) {
+            Issue issue = new Issue();
+
+            issue.setCategory(resultSet.getString("Category"));
+            issue.setName(resultSet.getString("Name"));
+            issue.setPriority(resultSet.getString("Priority"));
+            issue.setFeature(resultSet.getString("Feature"));
+            issue.setStatus(resultSet.getString("Status"));
+            issue.setAssignedTo(resultSet.getString("Assigned_to"));
+            issue.setDescription(resultSet.getString("Description"));
+            issue.setOpenedTime(resultSet.getTimestamp("Opened_time"));
+            issue.setLastUpdate(resultSet.getTimestamp("Last_update"));
+            issue.setProjectName(resultSet.getString("Project_name"));
+            issue.setSprintId(resultSet.getInt("Sprint_id"));
+            issue.setId(resultSet.getLong("id"));
+
+            list.add(issue);
+        }
+
+        return list;
+    }
+
     public static void updateIssue (Issue issue) {
         Timestamp now = new Timestamp(System.currentTimeMillis());
         try {
