@@ -25,6 +25,7 @@ public class Issue {
   private String projectName;
   private long sprintId;
   private Timestamp dueDate;
+  private Timestamp startDate;
 
 
   public Issue() {
@@ -46,6 +47,13 @@ public class Issue {
     this.id = id;
   }
 
+  public void setStartDate (Timestamp startDate){
+    this.startDate = startDate;
+  }
+
+  public Timestamp getStartDate() {
+    return startDate;
+  }
 
   public String getCategory() {
     return category;

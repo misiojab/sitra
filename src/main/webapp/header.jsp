@@ -26,13 +26,36 @@
         <span class="navbar-toggler-icon"></span>
     </button>
 
-    <div class="navbar-nav">
-        <div class="nav-item text-nowrap">
-            <% if(isAuthenticated){%>
-            <a class="nav-link px-3" href="${pageContext.request.contextPath}/logout">Sign out</a>
-            <% } %>
+    <div class="navbar-nav dropdown">
+
+        <div class="dropdown">
+            <button type="button" id="dropdownMenu" class="btn btn-sm btn-light" data-bs-toggle="dropdown" aria-expanded="false">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-three-dots-vertical" viewBox="0 0 16 16">
+                    <path d="M9.5 13a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0z"/>
+                </svg>
+            </button>
+            <ul class="dropdown-menu" aria-labelledby="dropdownMenu">
+                <li><a class="dropdown-item text-danger" href="#">delete</a></li>
+
+            </ul>
         </div>
+
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    Dropdown
+                </a>
+                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <li><a class="dropdown-item" href="#">Action</a></li>
+                    <li><a class="dropdown-item" href="#">Another action</a></li>
+                    <li><hr class="dropdown-divider"></li>
+                    <li><a class="dropdown-item" href="#">Something else here</a></li>
+                </ul>
+            </li>
+
     </div>
+    <% if(isAuthenticated){%>
+    <a class="nav-link px-3" href="${pageContext.request.contextPath}/logout">Sign out</a>
+    <% } %>
 </header>
 
 </body>
