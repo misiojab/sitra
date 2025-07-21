@@ -1,5 +1,5 @@
 # Sitra
-Simple bugtracking app for personal use and small teams with big dreams.
+Simple bugtracking app for personal use and small teams.
 ## Dependencies
 * [Java 17](https://www.oracle.com/java/technologies/javase/jdk17-archive-downloads.html) - JDK
 * [Tomcat 10.0.13](https://tomcat.apache.org/download-10.cgi) - Server
